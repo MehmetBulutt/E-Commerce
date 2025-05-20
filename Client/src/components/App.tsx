@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import { IProduct } from "../model/IProduct";
 import Header from "./Header";
-import ProductList from "./ProductList";
 import { Container, CssBaseline } from "@mui/material";
+import { Outlet } from "react-router";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-  function App() {
-   const [products, setProducts] = useState<IProduct[]>([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5254/api/Products")
-  .then(response => response.json())
-  .then(data => setProducts(data));
-  }, []);
- 
+function App() {
   return (
     <>
+      <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
       <CssBaseline />
-      <Header /> 
+      <Header />
       <Container>
-       <ProductList products={products} />
+        <Outlet />
       </Container>
     </>
   )
